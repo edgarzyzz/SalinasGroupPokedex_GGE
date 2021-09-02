@@ -85,13 +85,25 @@ class PokemonDetailFragment : Fragment() {
     }
 
 
-    val observerPokeDetail = Observer<PokemonDetail?>{
+    val observerPokeDetail = Observer<PokemonDetail?>{ it ->
         if (it == null)return@Observer
-        tvInfoAbilities.text = it.ability.toString()
+
+        var abilities = ""
+        it.abilities.forEach{ ab->
+
+                abilities += "${ab.ability.name}   "
+
+        }
+
+        var types = ""
+        it.types.forEach{ ty->
+            types += " ${ty.type.name}"
+        }
+        tvInfoAbilities.text = abilities
         tvInfoexperience.text = it.base_experience.toString()
         tvInfoHeight.text = it.height.toString()
         tvInfoWeight.text = it.weight.toString()
-        tvInfoTypes.text = it.types.toString()
+        tvInfoTypes.text = types
     }
     private fun requestDetail(id:Int) {
         val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
