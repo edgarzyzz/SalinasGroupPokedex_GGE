@@ -13,6 +13,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     var lvdIsFinishLoadData = MutableLiveData<Boolean>()
 
     var lvdCurrentPoke = MutableLiveData<PokemonResult>()
+    var lvdCurrentPokeImage = MutableLiveData<String>()
 
 
 
@@ -66,7 +67,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
+    fun setCurrentImage(frontDefault: String) {
+        lvdCurrentPokeImage.value = frontDefault
+    }
 
 
 }

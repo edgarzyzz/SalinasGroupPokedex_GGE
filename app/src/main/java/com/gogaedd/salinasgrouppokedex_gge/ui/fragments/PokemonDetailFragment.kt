@@ -1,14 +1,24 @@
 package com.gogaedd.salinasgrouppokedex_gge.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gogaedd.salinasgrouppokedex_gge.R
 import com.gogaedd.salinasgrouppokedex_gge.databinding.FragmentPokemonDetailBinding
+import com.gogaedd.salinasgrouppokedex_gge.model.PokemonResult
+import com.gogaedd.salinasgrouppokedex_gge.model.ResponsePokeImage
+import com.gogaedd.salinasgrouppokedex_gge.persistence.db.AppDatabase
+import com.gogaedd.salinasgrouppokedex_gge.persistence.net.ApiClient
+import com.gogaedd.salinasgrouppokedex_gge.persistence.net.ApiService
 import com.gogaedd.salinasgrouppokedex_gge.viewmodel.MainViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class PokemonDetailFragment : Fragment() {
@@ -27,10 +37,50 @@ class PokemonDetailFragment : Fragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.lvdCurrentPoke.observe(viewLifecycleOwner,observerCurrentPoke)
+
+    }
+
+
+
+    val observerCurrentPoke = Observer<PokemonResult>{
+
+        requestImage(it.uid)
+
+    }
+
+
+    private fun requestImage(id:Int){
+        val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+        val call = apiService.getObjectImage(id)
+        call.enqueue(object : Callback<ResponsePokeImage> {
+            override fun onResponse(call: Call<ResponsePokeImage>, response: Response<ResponsePokeImage>) {
+                Log.d("TAG", "onResponse: ")
+                if (response.isSuccessful){
+                    val body = response.body()
+                    body?.let {
+                        viewModel.setCurrentImage(it.sprites.front_default)
+
+                    }?: run{
+                        viewModel.setCurrentImage("")
+                    }
+                }else{
+                    viewModel.setCurrentImage("")
+                }
 
 
 
 
+            }
+
+            override fun onFailure(call: Call<ResponsePokeImage>, t: Throwable) {
+                viewModel.setCurrentImage("")
+            }
+        })
+    }
 
 
 }
