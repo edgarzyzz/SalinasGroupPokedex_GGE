@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.gogaedd.salinasgrouppokedex_gge.R
 import com.gogaedd.salinasgrouppokedex_gge.model.PokemonContainer
+import com.gogaedd.salinasgrouppokedex_gge.model.PokemonDetail
 import com.gogaedd.salinasgrouppokedex_gge.model.ResponsePokeImage
 import com.gogaedd.salinasgrouppokedex_gge.persistence.db.AppDatabase
 import com.gogaedd.salinasgrouppokedex_gge.persistence.net.ApiClient

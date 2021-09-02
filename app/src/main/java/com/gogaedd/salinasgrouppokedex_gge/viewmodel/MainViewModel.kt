@@ -3,6 +3,7 @@ package com.gogaedd.salinasgrouppokedex_gge.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.gogaedd.salinasgrouppokedex_gge.model.PokemonDetail
 import com.gogaedd.salinasgrouppokedex_gge.model.PokemonResult
 import com.gogaedd.salinasgrouppokedex_gge.repository.MainRepository
 
@@ -14,8 +15,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     var lvdCurrentPoke = MutableLiveData<PokemonResult>()
     var lvdCurrentPokeImage = MutableLiveData<String>()
+    var lvdCurrentDetail = MutableLiveData<PokemonDetail>()
 
 
+
+    fun setDetail(detail: PokemonDetail?){
+        lvdCurrentDetail.value =detail
+    }
 
     fun setStateload(isFinishLoadData: Boolean) {
         lvdIsFinishLoadData.postValue( isFinishLoadData)

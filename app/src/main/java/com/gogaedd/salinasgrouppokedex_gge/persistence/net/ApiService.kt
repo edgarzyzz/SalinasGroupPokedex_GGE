@@ -1,6 +1,7 @@
 package com.gogaedd.salinasgrouppokedex_gge.persistence.net
 
 import com.gogaedd.salinasgrouppokedex_gge.model.PokemonContainer
+import com.gogaedd.salinasgrouppokedex_gge.model.PokemonDetail
 import com.gogaedd.salinasgrouppokedex_gge.model.ResponsePokeImage
 import retrofit2.Call
 import retrofit2.Response
@@ -18,5 +19,9 @@ interface ApiService {
 
     @GET("https://pokeapi.co/api/v2/pokemon-form/{id}/")
     fun getObjectImage(@Path("id") id:Int): Call<ResponsePokeImage>
+
+
+    @GET("api/v2/pokemon/{id}/")
+    fun getDetail(@Path("id") id:Int): Call<PokemonDetail>
 
 }

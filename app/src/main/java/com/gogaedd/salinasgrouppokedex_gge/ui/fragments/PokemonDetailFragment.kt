@@ -8,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.gogaedd.salinasgrouppokedex_gge.R
 import com.gogaedd.salinasgrouppokedex_gge.databinding.FragmentPokemonDetailBinding
+import com.gogaedd.salinasgrouppokedex_gge.model.PokemonDetail
 import com.gogaedd.salinasgrouppokedex_gge.model.PokemonResult
 import com.gogaedd.salinasgrouppokedex_gge.model.ResponsePokeImage
-import com.gogaedd.salinasgrouppokedex_gge.persistence.db.AppDatabase
 import com.gogaedd.salinasgrouppokedex_gge.persistence.net.ApiClient
 import com.gogaedd.salinasgrouppokedex_gge.persistence.net.ApiService
 import com.gogaedd.salinasgrouppokedex_gge.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.fragment_pokemon_detail.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,6 +41,7 @@ class PokemonDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.lvdCurrentPoke.observe(viewLifecycleOwner,observerCurrentPoke)
+        viewModel.lvdCurrentDetail.observe(viewLifecycleOwner,observerPokeDetail)
 
     }
 
@@ -49,6 +50,7 @@ class PokemonDetailFragment : Fragment() {
     val observerCurrentPoke = Observer<PokemonResult>{
 
         requestImage(it.uid)
+        requestDetail(it.uid)
 
     }
 
@@ -78,6 +80,35 @@ class PokemonDetailFragment : Fragment() {
 
             override fun onFailure(call: Call<ResponsePokeImage>, t: Throwable) {
                 viewModel.setCurrentImage("")
+            }
+        })
+    }
+
+
+    val observerPokeDetail = Observer<PokemonDetail?>{
+        if (it == null)return@Observer
+        tvInfoAbilities.text = it.ability.toString()
+        tvInfoexperience.text = it.base_experience.toString()
+        tvInfoHeight.text = it.height.toString()
+        tvInfoWeight.text = it.weight.toString()
+        tvInfoTypes.text = it.types.toString()
+    }
+    private fun requestDetail(id:Int) {
+        val apiService = ApiClient.getRetrofit().create(ApiService::class.java)
+        val detail = apiService.getDetail(id)
+        detail.enqueue(object: Callback<PokemonDetail>{
+            override fun onResponse(call: Call<PokemonDetail>, response: Response<PokemonDetail>) {
+                if (response.isSuccessful){
+                    viewModel.setDetail(response.body()!!)
+                    return
+                }
+                viewModel.setDetail(null)
+
+            }
+
+            override fun onFailure(call: Call<PokemonDetail>, t: Throwable) {
+                Log.d("TAG", "onFailure: ")
+                viewModel.setDetail(null)
             }
         })
     }

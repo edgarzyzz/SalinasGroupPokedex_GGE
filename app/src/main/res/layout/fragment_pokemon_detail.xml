@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Id"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -38,6 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInfoIdPoke" />
@@ -47,6 +51,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{viewModel.lvdCurrentPoke.name}"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvNamePoke" />
@@ -62,12 +68,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvInfoNamePoke" />
-
+<!--Form-->
+<!--Form-->
+<!--Form-->
         <TextView
             android:id="@+id/tvAbilities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Habilidades"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgvPoke" />
@@ -76,16 +87,20 @@
             android:id="@+id/tvInfoAbilities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="--------------"
+            android:text="--------------------"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAbilities" />
+<!--        android:text='@{viewModel.lvdCurrentDetail.ability ?? ""}'-->
 
         <TextView
             android:id="@+id/tvexperience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="base_experience"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInfoAbilities" />
@@ -94,16 +109,20 @@
             android:id="@+id/tvInfoexperience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="--------------"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvexperience" />
+<!--        android:text='@{viewModel.lvdCurrentDetail.base_experience ?? ""}'-->
 
         <TextView
             android:id="@+id/tvHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="height"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInfoexperience" />
@@ -112,16 +131,20 @@
             android:id="@+id/tvInfoHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="--------------"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvHeight" />
+<!--        android:text='@{viewModel.lvdCurrentDetail.height ?? ""}'-->
 
         <TextView
             android:id="@+id/weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="weight"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInfoHeight" />
@@ -130,16 +153,20 @@
             android:id="@+id/tvInfoWeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="--------------"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/weight" />
+<!--        android:text='@{viewModel.lvdCurrentDetail.weight ?? ""}'-->
 
         <TextView
             android:id="@+id/tvTypes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="types"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInfoWeight" />
@@ -148,10 +175,11 @@
             android:id="@+id/tvInfoTypes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="--------------"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTypes" />
+<!--        android:text='@{viewModel.lvdCurrentDetail.types ?? ""}'-->
 
 
         <Button
