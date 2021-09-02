@@ -16,23 +16,5 @@ class MainActivity : AppCompatActivity() {
 
 
 
-//        val url = "https://pokeapi.co/api/v2/pokemon/1/"
-
-
-
-
-
-        /*pokemonContainer.enqueue(object: Callback<PokemonContainer>{
-            override fun onResponse(
-                call: Call<PokemonContainer>,
-                response: Response<PokemonContainer>
-            ) {
-
-            }
-
-            override fun onFailure(call: Call<PokemonContainer>, t: Throwable) {
-                Log.d("TAG", "onResponse: ")
-            }
-        })*/
     }
 }

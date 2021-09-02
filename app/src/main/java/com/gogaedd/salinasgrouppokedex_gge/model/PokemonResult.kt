@@ -18,10 +18,19 @@ data class PokemonResult(
 
     @SerializedName("url")
     @ColumnInfo(name = "url")
-    val url: String = ""
+    val url: String = "",
+
+
+    @SerializedName("image")
+    @ColumnInfo(name = "image")
+    val image: String = ""
 
 
 ) {
+
+    fun createUrlImage(){
+
+    }
     fun getId(): Int {
         if (url.isNotEmpty() && url.contains("/")) {
             val split = url.split("/")

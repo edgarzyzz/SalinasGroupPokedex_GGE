@@ -6,19 +6,67 @@ import androidx.lifecycle.MutableLiveData
 import com.gogaedd.salinasgrouppokedex_gge.model.PokemonResult
 import com.gogaedd.salinasgrouppokedex_gge.repository.MainRepository
 
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = MainRepository(application)
 
-    private var lvdPokemons = MutableLiveData<MutableList<PokemonResult>>()
+    var lvdPokemons = MutableLiveData<MutableList<PokemonResult>>(mutableListOf())
+    var lvdIsFinishLoadData = MutableLiveData<Boolean>()
 
-    fun requestAllpokemons(){
-        repository.storeAllPokemons()
+    var lvdCurrentPoke = MutableLiveData<PokemonResult>()
+
+
+
+    fun setStateload(isFinishLoadData: Boolean) {
+        lvdIsFinishLoadData.postValue( isFinishLoadData)
     }
 
-    fun loadAllPokemons() {
-        lvdPokemons.value = repository.getAllPokemons()
+    fun setPokemons(all: MutableList<PokemonResult>) {
+        lvdPokemons.postValue(all)
+    }
+
+
+    fun setPokemonSelected(pokemon: PokemonResult) {
+        lvdCurrentPoke.value = pokemon
+    }
+    fun nextPoke(){
+        lvdPokemons.value?.let{
+            if (it.isEmpty()){
+                return
+            }else{
+                var i = getCurrentPos()
+                if (i>=it.size){
+                    i=0
+                }
+                setPokemonSelected(it.get(i))
+            }
+        }
+
 
     }
+
+    fun previousPoke(){
+        lvdPokemons.value?.let{
+            if (it.isEmpty()){
+                return
+            }else{
+                var pos = getCurrentPos() - 2
+                if (pos<0){
+                    pos=it.size-1
+                }
+                setPokemonSelected(it.get(pos))
+            }
+        }
+    }
+
+    private fun getCurrentPos(): Int {
+        return lvdCurrentPoke.value?.let {
+            it.uid
+        }?:run{
+            0
+        }
+    }
+
+
 
 
 }
